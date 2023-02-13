@@ -18,9 +18,6 @@ app.get('/', async (req, res) => {
 })
 
 app.get("/query/:data", async (req, res) => {
-    // console.log(req.body);
-
-
     const configuration = new Configuration({
         apiKey: process.env.OPENAI_API_KEY,
     });
