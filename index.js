@@ -14,7 +14,7 @@ const { Configuration, OpenAIApi } = require("openai");
 app.get('/', async (req, res) => {
     // console.log(req.body);
 
-    res.send("hello")
+    res.send("from port")
 })
 
 app.get("/query/:data", async (req, res) => {
@@ -45,6 +45,13 @@ app.get("/query/:data", async (req, res) => {
             console.log(error.message);
         }
     }
+})
+
+
+app.post('/query', (req, res) => {
+    console.log(req.body);
+
+    res.send('req')
 })
 
 
