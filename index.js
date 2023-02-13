@@ -19,7 +19,7 @@ app.get('/', async (req, res) => {
 
 app.get("/query/:data", async (req, res) => {
     const configuration = new Configuration({
-        apiKey: process.env.OPENAI_API_KEY,
+        apiKey: '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',
     });
     const openai = new OpenAIApi(configuration);
 
