@@ -9,7 +9,7 @@ const { Configuration, OpenAIApi } = require("openai");
 app.use(cors())
 app.use(express.json())
 
-const uri = `mongodb+srv://shakib:YScsK0wfQHhBhvRV@cluster0.ylyrso9.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASS}@cluster0.ylyrso9.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 
@@ -31,7 +31,7 @@ app.get("/messages", async (req,res) => {
 
 app.get("/query/:data", async (req, res) => {
     const configuration = new Configuration({
-        apiKey: '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',
+        apiKey: process.env.OPENAI_API_KEY,
     });
     const openai = new OpenAIApi(configuration);
 
