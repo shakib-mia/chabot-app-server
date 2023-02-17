@@ -9,9 +9,6 @@ app.use(express.json())
 
 const port = process.env.PORT || 4000;
 
-
-
-
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASS}@cluster0.ylyrso9.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
