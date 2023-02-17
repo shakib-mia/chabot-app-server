@@ -9,10 +9,9 @@ const { Configuration, OpenAIApi } = require("openai");
 app.use(cors())
 app.use(express.json())
 
-const uri = `mongodb+srv://shakib:YScsK0wfQHhBhvRV@cluster0.ylyrso9.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASS}@cluster0.ylyrso9.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
-client.connect()
 
 app.get('/', async (req, res) => {
     // console.log(req.body);
@@ -20,7 +19,7 @@ app.get('/', async (req, res) => {
     res.send(`from port ${port}`)
 })
 
-app.get("/messages", async (req,res) => {
+app.get("/messages", async (req, res) => {
     const query = {};
 
     const collection = client.db('chatbot').collection('messages')
@@ -32,12 +31,12 @@ app.get("/messages", async (req,res) => {
 
 app.get("/query/:data", async (req, res) => {
     const configuration = new Configuration({
-        apiKey: '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',
+        apiKey: process.env.OPENAI_API_KEY,
     });
     const openai = new OpenAIApi(configuration);
 
     try {
-        // await client.connect();
+        await client.connect();
 
         const collection = client.db('chatbot').collection('messages')
 
@@ -61,7 +60,7 @@ app.get("/query/:data", async (req, res) => {
     } catch (error) {
         if (error.response) {
             console.log(error.response.status);
-            console.log(error.response.data);
+            res.send({ message: error.response.data.error.message });
         } else {
             console.log(error.message);
         }
