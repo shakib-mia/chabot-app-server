@@ -12,6 +12,7 @@ app.use(express.json())
 const uri = `mongodb+srv://shakib:YScsK0wfQHhBhvRV@cluster0.ylyrso9.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
+client.connect()
 
 app.get('/', async (req, res) => {
     // console.log(req.body);
@@ -36,7 +37,7 @@ app.get("/query/:data", async (req, res) => {
     const openai = new OpenAIApi(configuration);
 
     try {
-        await client.connect();
+        // await client.connect();
 
         const collection = client.db('chatbot').collection('messages')
 
