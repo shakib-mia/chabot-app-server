@@ -1,21 +1,32 @@
 {
-  "name": "backend",
+  "name": "chatbot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "18.x"
+    "node": "14.x"
   },
   "scripts": {
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "build": "node index.js",
+    "start-dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shakib-mia/chatbot-server.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shakib-mia/chatbot-server/issues"
+  },
+  "homepage": "https://github.com/shakib-mia/chatbot-server#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongodb": "^5.0.1",
-    "openai": "^3.1.0"
+    "mongodb": "^4.13.0"
   }
 }
