@@ -1,15 +1,14 @@
-const express = require('express');
-const cors = require('cors');
-const { Configuration, OpenAIApi } = require("openai");
+const { MongoClient, ServerApiVersion } = require('mongodb');
 require("dotenv").config()
+const cors = require('cors');
+const express = require('express');
 const app = express();
+const port = process.env.PORT || 4000;
+const { Configuration, OpenAIApi } = require("openai");
 
 app.use(cors())
 app.use(express.json())
 
-const port = process.env.PORT || 4000;
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASS}@cluster0.ylyrso9.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
