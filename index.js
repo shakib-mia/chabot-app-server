@@ -13,9 +13,9 @@ const uri = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASS}@cluster0
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run() {
-    try {
-        await client.connect()
+    await client.connect();
 
+    try {
         app.get('/', async (req, res) => {
             res.send({
                 message: "Welcome to Chatbot Server"
