@@ -16,7 +16,9 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 app.get('/', async (req, res) => {
     // console.log(req.body);
 
-    res.send(`from port ${port}`)
+    res.send({
+        message: "Welcome to Chatbot Server"
+    })
 })
 
 app.get("/messages", async (req, res) => {
