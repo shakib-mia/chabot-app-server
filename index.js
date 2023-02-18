@@ -19,8 +19,7 @@ app.get('/', async (req, res) => {
 })
 
 app.get("/messages", async (req, res) => {
-    const query = {};
-
+    const query = { token: req.headers.authorization };
     const collection = client.db('chatbot').collection('messages')
     const cursor = collection.find(query);
     const messages = await cursor.toArray();
@@ -28,7 +27,7 @@ app.get("/messages", async (req, res) => {
     res.send(messages)
 })
 
-app.get("/query/:data", async (req, res) => {
+app.post("/query", async (req, res) => {
     const configuration = new Configuration({
         apiKey: process.env.OPENAI_API_KEY,
     });
@@ -41,7 +40,7 @@ app.get("/query/:data", async (req, res) => {
 
         const completion = await openai.createCompletion({
             model: "text-davinci-002",
-            prompt: req.params.data,
+            prompt: req.body.message,
             temperature: 0,
             max_tokens: 3000,
             top_p: 1,
@@ -49,11 +48,11 @@ app.get("/query/:data", async (req, res) => {
             presence_penalty: 0,
         });
         const data = {
-            message: req.params.data,
-            reply: completion.data.choices[0].text
+            message: req.body.message,
+            reply: completion.data.choices[0].text,
+            token: req.body.token
         };
         const cursor = collection.insertOne(data);
-        // const reply = cursor.toArray()
 
         res.send(completion.data.choices[0]);
     } catch (error) {
