@@ -12,11 +12,7 @@ app.use(express.json())
 const uri = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASS}@cluster0.ylyrso9.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
-client.connect()
-
 app.get('/', async (req, res) => {
-    // console.log(req.body);
-
     res.send({
         message: "Welcome to Chatbot Server"
     })
