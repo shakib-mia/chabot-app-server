@@ -17,8 +17,6 @@ async function run() {
         await client.connect()
 
         app.get('/', async (req, res) => {
-            // console.log(req.body);
-
             res.send({
                 message: "Welcome to Chatbot Server"
             })
@@ -59,7 +57,7 @@ async function run() {
                     reply: completion.data.choices[0].text
                 };
                 const cursor = collection.insertOne(data);
-                // const reply = cursor.toArray()
+                const reply = cursor.toArray()
 
                 res.send(completion.data.choices[0]);
             } catch (error) {
