@@ -72,7 +72,9 @@ async function run() {
             }
         })
     }
-    catch {}
+    catch (err){
+        console.log(err);
+    }
 }
 
 run().catch(console.dir)
