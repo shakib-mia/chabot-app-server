@@ -1,9 +1,9 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require("dotenv").config()
 const cors = require('cors');
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 const { Configuration, OpenAIApi } = require("openai");
 const jwt = require('jsonwebtoken');
 
@@ -83,6 +83,14 @@ app.get('/users', async (req, res) => {
     const cursor = collection.find(query);
     const users = await cursor.toArray();
     res.send(users)
+})
+
+app.get('/users/:token', async (req, res) => {
+    const query = { _id: ObjectId(req.params.token) };
+    const collection = client.db('chatbot').collection('users')
+    const cursor = collection.find(query);
+    const users = await cursor.toArray();
+    res.send(users);
 })
 
 app.post('/users', async (req, res) => {
