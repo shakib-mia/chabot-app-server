@@ -106,8 +106,7 @@ app.post('/users', async (req, res) => {
         const cursor = await collection.insertOne(body);
         res.send(cursor)
     } else {
-        res.send({ message: 'User Already Exists' })
-        res.status(409)
+        res.send({ message: 'User Already Exists', statusCode: 409 })
     }
 })
 
